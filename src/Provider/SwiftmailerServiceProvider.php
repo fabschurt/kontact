@@ -19,7 +19,7 @@ use Silex\Provider as SilexProvider;
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
  */
-final class MailerServiceProvider implements ServiceProviderInterface, BootableProviderInterface
+final class SwiftmailerServiceProvider implements ServiceProviderInterface, BootableProviderInterface
 {
     /**
      * {@inheritDoc}

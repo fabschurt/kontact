@@ -46,7 +46,7 @@ final class Application extends SilexApplication
         parent::__construct($values);
 
         // Register providers
-        $this->register(new Provider\MailerServiceProvider());
+        $this->register(new Provider\SwiftmailerServiceProvider());
         $this->register(new SilexProvider\ServiceControllerServiceProvider());
         $this->register(new Provider\ControllerServiceProvider());
     }
