@@ -12,12 +12,14 @@
 namespace FabSchurt\Kontact\Provider;
 
 use Pimple\{Container, ServiceProviderInterface};
+use Silex\Api\BootableProviderInterface;
+use Silex\Application;
 use Silex\Provider as SilexProvider;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
  */
-final class MailerServiceProvider implements ServiceProviderInterface
+final class MailerServiceProvider implements ServiceProviderInterface, BootableProviderInterface
 {
     /**
      * {@inheritDoc}
@@ -38,10 +40,15 @@ final class MailerServiceProvider implements ServiceProviderInterface
             'encryption' => $container['mailer.encryption'],
             'auth_mode'  => $container['mailer.auth_mode'],
         ];
+    }
 
-        // Plugins
-        if ($container['debug']) {
-            $container['mailer']->registerPlugin(new \Swift_Plugins_RedirectingPlugin($container['admin_email']));
+    /**
+     * {@inheritDoc}
+     */
+    public function boot(Application $app)
+    {
+        if ($app['debug']) {
+            $app['mailer']->registerPlugin(new \Swift_Plugins_RedirectingPlugin($app['admin_email']));
         }
     }
 }
