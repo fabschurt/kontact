@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f6ac3d8e48245902facbbca9a94a7be1",
-    "content-hash": "70c49b2aa106e58c04cfb7c46c87e3cf",
+    "hash": "569ce3ad70a28706688014dc45276454",
+    "content-hash": "86eb5cccffdae71c3911daba01de77ba",
     "packages": [
         {
             "name": "fabschurt/silex-provider-captcha",
@@ -126,6 +126,45 @@
                 "spam"
             ],
             "time": "2015-09-11 15:23:20"
+        },
+        {
+            "name": "junker/symfony-jsend-response",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Junker/JSendResponse.git",
+                "reference": "bbaac6c72a64bcd7b28e90bdd87667d89d73ade3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Junker/JSendResponse/zipball/bbaac6c72a64bcd7b28e90bdd87667d89d73ade3",
+                "reference": "bbaac6c72a64bcd7b28e90bdd87667d89d73ade3",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Junker": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Kosenkov",
+                    "email": "dk-junker@ya.ru"
+                }
+            ],
+            "description": "JSendResponse Component for HttpFoundation based frameworks (Symfony, Silex, Drupal etc.)",
+            "keywords": [
+                "jsend",
+                "response",
+                "silex",
+                "symfony"
+            ],
+            "time": "2016-06-04 20:10:23"
         },
         {
             "name": "paragonie/random_compat",

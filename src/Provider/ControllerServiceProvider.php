@@ -12,9 +12,10 @@
 namespace FabSchurt\Kontact\Provider;
 
 use FabSchurt\Kontact\Controller\KontactController;
+use Junker\Symfony\JSendErrorResponse;
 use Pimple\{Container, ServiceProviderInterface};
 use Silex\Api\{BootableProviderInterface, ControllerProviderInterface};
-use Silex\Application;
+use Silex\{Application, ControllerCollection};
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -38,6 +39,20 @@ final class ControllerServiceProvider implements ServiceProviderInterface, Boota
     public function boot(Application $app)
     {
         $app->mount('', $this);
+
+        // Register custom error handler
+        $app->error(function (\Exception $e, Request $req, int $code) use ($app): JSendErrorResponse {
+            $data = [];
+            if ($app['debug']) {
+                $data = [
+                    'file'  => $e->getFile(),
+                    'line'  => $e->getLine(),
+                    'trace' => $e->getTraceAsString(),
+                ];
+            }
+
+            return new JSendErrorResponse($e->getMessage(), $e->getCode(), $data, $code);
+        });
     }
 
     /**
