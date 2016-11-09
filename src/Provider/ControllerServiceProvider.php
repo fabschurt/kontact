@@ -58,7 +58,7 @@ final class ControllerServiceProvider implements ServiceProviderInterface, Boota
     /**
      * {@inheritDoc}
      */
-    public function connect(Application $app)
+    public function connect(Application $app): ControllerCollection
     {
         $routes = $app['controllers_factory'];
         $routes
