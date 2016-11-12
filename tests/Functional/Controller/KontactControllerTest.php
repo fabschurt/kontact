@@ -81,10 +81,10 @@ final class KontactControllerTest extends WebTestCase
     {
         $app = new Application(['debug' => true]);
         $app['swiftmailer.use_spool'] = false;
-        $app['swiftmailer.transport'] = function (Container $container) {
+        $app['swiftmailer.transport'] = function (Container $container): \Swift_Transport {
             return new \Swift_Transport_NullTransport($container['swiftmailer.transport.eventdispatcher']);
         };
-        $app['mailer.message_logger'] = function () {
+        $app['mailer.message_logger'] = function (): \Swift_Plugins_MessageLogger {
             return new \Swift_Plugins_MessageLogger();
         };
         $app['mailer']->registerPlugin($app['mailer.message_logger']);

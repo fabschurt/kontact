@@ -49,6 +49,7 @@ final class ControllerServiceProvider implements ServiceProviderInterface, Boota
             $data = [];
             if ($app['debug']) {
                 $data = [
+                    'class' => get_class($e),
                     'file'  => $e->getFile(),
                     'line'  => $e->getLine(),
                     'trace' => $e->getTraceAsString(),
