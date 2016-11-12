@@ -79,10 +79,7 @@ final class KontactControllerTest extends WebTestCase
      */
     public function createApplication(): Application
     {
-        $app = new Application([
-            'debug'        => true,
-            'session.test' => true,
-        ]);
+        $app = new Application(['debug' => true]);
         $app['swiftmailer.use_spool'] = false;
         $app['swiftmailer.transport'] = function (Container $container) {
             return new \Swift_Transport_NullTransport($container['swiftmailer.transport.eventdispatcher']);
