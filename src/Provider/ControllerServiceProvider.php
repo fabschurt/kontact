@@ -31,6 +31,7 @@ final class ControllerServiceProvider implements ServiceProviderInterface, Boota
      */
     public function register(Container $container)
     {
+        // Services
         $container['controller.kontact'] = function () {
             return new KontactController();
         };
