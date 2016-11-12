@@ -32,7 +32,7 @@ final class ControllerServiceProvider implements ServiceProviderInterface, Boota
     public function register(Container $container)
     {
         // Services
-        $container['controller.kontact'] = function () {
+        $container['controller.kontact'] = function (): KontactController {
             return new KontactController();
         };
     }
