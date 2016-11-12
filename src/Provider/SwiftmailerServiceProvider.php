@@ -11,7 +11,8 @@
 
 namespace FabSchurt\Kontact\Provider;
 
-use Pimple\{Container, ServiceProviderInterface};
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Silex\Api\BootableProviderInterface;
 use Silex\Application;
 use Silex\Provider as SilexProvider;

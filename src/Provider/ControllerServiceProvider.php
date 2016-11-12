@@ -13,9 +13,12 @@ namespace FabSchurt\Kontact\Provider;
 
 use FabSchurt\Kontact\Controller\KontactController;
 use Junker\Symfony\JSendErrorResponse;
-use Pimple\{Container, ServiceProviderInterface};
-use Silex\Api\{BootableProviderInterface, ControllerProviderInterface};
-use Silex\{Application, ControllerCollection};
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+use Silex\Api\BootableProviderInterface;
+use Silex\Api\ControllerProviderInterface;
+use Silex\Application;
+use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

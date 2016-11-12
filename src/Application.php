@@ -12,7 +12,8 @@
 namespace FabSchurt\Kontact;
 
 use Dotenv\Dotenv;
-use Silex\{Application as SilexApplication, Provider as SilexProvider};
+use Silex\Application as SilexApplication;
+use Silex\Provider as SilexProvider;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>

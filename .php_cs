@@ -13,7 +13,6 @@ return Symfony\CS\Config\Config::create()
     ->setUsingCache(true)
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers([
-        '-multiple_use',
         '-phpdoc_inline_tag',
         '-phpdoc_to_comment',
         '-psr0',
