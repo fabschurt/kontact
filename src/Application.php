@@ -48,6 +48,7 @@ final class Application extends SilexApplication
 
         // Register providers
         $this->register(new Provider\SwiftmailerServiceProvider());
+        $this->register(new Provider\FormServiceProvider());
         $this->register(new SilexProvider\ServiceControllerServiceProvider());
         $this->register(new Provider\ControllerServiceProvider());
     }
