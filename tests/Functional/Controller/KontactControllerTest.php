@@ -12,6 +12,7 @@
 namespace FabSchurt\Kontact\Tests\Functional\Controller;
 
 use FabSchurt\Kontact\Application;
+use Pimple\Container;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
