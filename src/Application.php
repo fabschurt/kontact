@@ -27,22 +27,20 @@ final class Application extends SilexApplication
     {
         // Initialize app
         $rootDir = __DIR__.'/..';
-        if (is_file("{$rootDir}/.env")) {
+        if (
+            is_file("{$rootDir}/.env") &&
+            getenv('ENVIRONMENT') !== 'test' &&
+            ($values['env'] ?? null) !== 'test')
+        ) {
             $dotenv = new Dotenv($rootDir);
             $dotenv->load();
         }
         $values = array_merge([
-            'name'              => 'kontact',
-            'root_dir'          => $rootDir,
-            'env'               => getenv('ENVIRONMENT') ?: 'prod',
-            'debug'             => getenv('ENVIRONMENT') === 'dev',
-            'admin_email'       => getenv('ADMIN_EMAIL'),
-            'mailer.host'       => getenv('MAILER_HOST'),
-            'mailer.port'       => getenv('MAILER_PORT'),
-            'mailer.username'   => getenv('MAILER_USERNAME'),
-            'mailer.password'   => getenv('MAILER_PASSWORD'),
-            'mailer.encryption' => getenv('MAILER_ENCRYPTION'),
-            'mailer.auth_mode'  => getenv('MAILER_AUTH_MODE'),
+            'app_name'    => 'kontact',
+            'root_dir'    => $rootDir,
+            'env'         => getenv('ENVIRONMENT') ?: 'prod',
+            'debug'       => in_array(getenv('ENVIRONMENT'), ['dev', 'test'], true),
+            'admin_email' => getenv('ADMIN_EMAIL'),
         ], $values);
         parent::__construct($values);
 
