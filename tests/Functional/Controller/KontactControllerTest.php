@@ -30,11 +30,27 @@ final class KontactControllerTest extends WebTestCase
         ]);
         $response = $this->client->getResponse();
         verify($response->isOk())->true();
-        verify(json_decode($response->getContent()))->same([
+        verify(json_decode($response->getContent(), true))->same([
             'status' => 'success',
             'data'   => null,
         ]);
         verify($this->app['mailer.message_logger']->countMessages())->same(1);
+        $message = $this->app['mailer.message_logger']->getMessages()[0];
+        verify($message->getSubject())->same('Kontact');
+        verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
+        verify($message->getTo())->same(['jason.bourne@example.org' => false]);
+        verify($message->getBody())->same(
+<<<'BODY'
+Name: John Doe
+
+E-mail address: john.doe@example.org
+
+Message:
+
+Hello, is it me you’re looking for?
+
+BODY
+        );
     }
 
     public function testPostWithBlankParameters()
@@ -46,12 +62,12 @@ final class KontactControllerTest extends WebTestCase
         ]);
         $response = $this->client->getResponse();
         verify($response->isOk())->true();
-        verify(json_decode($response->getContent()))->same([
+        verify(json_decode($response->getContent(), true))->same([
             'status' => 'fail',
             'data'   => [
-                'name'    => 'This value should not be blank.',
-                'address' => 'This value should not be blank.',
-                'message' => 'This value should not be blank.',
+                'name'    => ['This value should not be blank.'],
+                'address' => ['This value should not be blank.'],
+                'message' => ['This value should not be blank.'],
             ],
         ]);
         verify($this->app['mailer.message_logger']->countMessages())->same(0);
@@ -60,15 +76,15 @@ final class KontactControllerTest extends WebTestCase
     public function testPostWithExtraneousParameters()
     {
         $this->client->request(Request::METHOD_POST, '/post', [
-            'name'             => 'Jane Doe',
-            'extraneous_param' => 'This is not right.',
+            'message'          => 'Hi, I’m Jane Doe.',
+            'extraneous_param' => 'Forbidden',
         ]);
         $response = $this->client->getResponse();
         verify($response->isOk())->true();
-        verify(json_decode($response->getContent()))->same([
+        verify(json_decode($response->getContent(), true))->same([
             'status' => 'fail',
             'data'   => [
-                'extraneous_param' => 'This extra parameter is not allowed.',
+                'errors' => ['This form should not contain extra fields.'],
             ],
         ]);
         verify($this->app['mailer.message_logger']->countMessages())->same(0);
@@ -79,7 +95,12 @@ final class KontactControllerTest extends WebTestCase
      */
     public function createApplication(): Application
     {
-        $app = new Application(['debug' => true]);
+        $app = new Application([
+            'environment'   => 'test',
+            'load_env_file' => false,
+            'debug'         => true,
+            'admin_email'   => 'jason.bourne@example.org',
+        ]);
         $app['swiftmailer.use_spool'] = false;
         $app['swiftmailer.transport'] = function (Container $container): \Swift_Transport {
             return new \Swift_Transport_NullTransport($container['swiftmailer.transport.eventdispatcher']);
