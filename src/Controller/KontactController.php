@@ -11,13 +11,34 @@
 
 namespace FabSchurt\Kontact\Controller;
 
+use FabSchurt\Kontact\Form\Type\KontactType;
+use Junker\Symfony\JSendFailResponse;
+use Junker\Symfony\JSendResponse;
+use Junker\Symfony\JSendSuccessResponse;
+use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
  */
 final class KontactController
 {
-    public function postAction()
+    /**
+     * @param Request     $req
+     * @param Application $app
+     *
+     * @return JSendResponse
+     */
+    public function postAction(Request $req, Application $app): JSendResponse
     {
-        return 'Not implemented (for now).';
+        $form = $app['form.factory']->createNamed('', KontactType::class);
+        $form->handleRequest($req);
+        if ($form->isValid()) {
+            $app['mailer']->send($app['mailer.message.factory']($form->getData()));
+
+            return new JSendSuccessResponse();
+        }
+
+        return new JSendFailResponse($app['form.error_flattener']($form->getErrors(true)));
     }
 }
