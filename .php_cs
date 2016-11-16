@@ -35,5 +35,6 @@ return Symfony\CS\Config\Config::create()
         Symfony\CS\Finder\DefaultFinder::create()
             ->in('src/')
             ->in('tests/')
+            ->in('app/views/')
     )
 ;
