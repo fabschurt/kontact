@@ -46,22 +46,22 @@ final class KontactType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        foreach ($this->requestParams as $fieldName) {
+        foreach (array_keys($this->requestParams) as $fieldName) {
             switch ($fieldName) {
                 case 'name':
                     $builder
                         ->add($fieldName, Type\TextType::class, [
-                            'contstraints' => [
+                            'constraints' => [
                                 new Constraints\NotBlank(),
                                 new Constraints\Length(['max' => 64]),
                             ],
                         ])
                     ;
                     break;
-                case 'email_address':
+                case 'address':
                     $builder
                         ->add($fieldName, Type\EmailType::class, [
-                            'contstraints' => [
+                            'constraints' => [
                                 new Constraints\NotBlank(),
                                 new Constraints\Length(['max' => 128]),
                                 new Constraints\Email(),
@@ -73,7 +73,7 @@ final class KontactType extends AbstractType
         }
         $builder
             ->add('message', Type\TextareaType::class, [
-                'contstraints' => [
+                'constraints' => [
                     new Constraints\NotBlank(),
                     new Constraints\Length(['max' => $this->maxMessageLength]),
                 ],
