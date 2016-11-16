@@ -28,7 +28,7 @@ class RoboFile extends Tasks
      */
     public function test()
     {
-        return $this
+        $this
             ->taskPHPUnit('./vendor/bin/phpunit')
             ->run()
         ;
@@ -39,9 +39,8 @@ class RoboFile extends Tasks
      */
     public function lint()
     {
-        return $this
+        $this
             ->taskExec('find {src,tests} -type f -name "*.php" -exec php -l {} \\;')
-            ->printed(false)
             ->run()
         ;
     }
