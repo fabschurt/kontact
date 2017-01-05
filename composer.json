@@ -21,7 +21,6 @@
   },
   "require": {
     "php": "^7.0",
-    "vlucas/phpdotenv": "^2.4",
     "pimple/pimple": "^3.0",
     "silex/silex": "^2.0",
     "symfony/config": "^2.8|^3.0",
@@ -33,6 +32,9 @@
     "symfony/validator": "^2.8|^3.0",
     "swiftmailer/swiftmailer": "^5.4",
     "twig/twig": "^1.27",
+    "vlucas/phpdotenv": "^2.4",
+    "fabschurt/php-utils": "^1.0@dev",
+    "fabschurt/silex-provider-framework": "^1.0@dev",
     "fabschurt/silex-provider-captcha": "^1.0@dev",
     "junker/symfony-jsend-response": "^0.1"
   },
