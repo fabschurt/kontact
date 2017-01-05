@@ -36,7 +36,8 @@
     "fabschurt/php-utils": "^1.0@dev",
     "fabschurt/silex-provider-framework": "^1.0@dev",
     "fabschurt/silex-provider-captcha": "^1.0@dev",
-    "junker/symfony-jsend-response": "^0.1"
+    "junker/symfony-jsend-response": "^0.1",
+    "gnugat/nomo-spaco": "dev-fix-classname-visitors as 0.4"
   },
   "require-dev": {
     "consolidation/robo": "^1.0",
@@ -58,6 +59,12 @@
     }
   },
   "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:fabschurt/nomo-spaco"
+    }
+  ],
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
