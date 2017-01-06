@@ -39,6 +39,6 @@ final class KontactController
             return new JSendSuccessResponse();
         }
 
-        return new JSendFailResponse($app['form.error_flattener']($form->getErrors(true)));
+        return new JSendFailResponse($app['form.error_flattener']->flattenFormErrors($form));
     }
 }

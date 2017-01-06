@@ -15,8 +15,6 @@ use FabSchurt\Kontact\Form\Type\KontactType;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Silex\Provider as SilexProvider;
-use Symfony\Component\Form\FormErrorIterator;
-use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
@@ -37,23 +35,6 @@ final class FormServiceProvider implements ServiceProviderInterface
         $container['form.kontact.max_message_length'] = 16384;
 
         // Services
-        $container['form.error_flattener'] = $container->protect(
-            /**
-             * Transforms a form error iterator into an flattened array.
-             *
-             * @param FormErrorIterator $errors Form error iterator returned by `{@see FormInterface::getErrors()}`
-             *
-             * @return array A list of error messages, grouped by field names
-             */
-            function (FormErrorIterator $errors): array {
-                $flatArray = [];
-                foreach ($errors as $error) {
-                    $flatArray[$error->getOrigin()->getName() ?: 'errors'][] = $error->getMessage();
-                }
-
-                return $flatArray;
-            }
-        );
         $container['form.type.kontact'] = function (Container $container): KontactType {
             return new KontactType(
                 $container['request_stack']->getCurrentRequest()->request->all(),

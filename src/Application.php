@@ -12,8 +12,13 @@
 namespace FabSchurt\Kontact;
 
 use Dotenv\Dotenv;
+use Dotenv\Loader;
+use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
+use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
+use Junker\Symfony\JSendErrorResponse;
 use Silex\Application as SilexApplication;
 use Silex\Provider as SilexProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
@@ -25,29 +30,45 @@ final class Application extends SilexApplication
      */
     public function __construct(array $values = [])
     {
-        // Initialize app
         $rootDir = __DIR__.'/..';
-        if (
-            is_file("{$rootDir}/.env") &&
-            getenv('ENVIRONMENT') !== 'test' &&
-            ($values['env'] ?? null) !== 'test')
-        ) {
-            $dotenv = new Dotenv($rootDir);
-            $dotenv->load();
-        }
-        $values = array_merge([
-            'app_name'    => 'kontact',
-            'root_dir'    => $rootDir,
-            'env'         => getenv('ENVIRONMENT') ?: 'prod',
-            'debug'       => in_array(getenv('ENVIRONMENT'), ['dev', 'test'], true),
-            'admin_email' => getenv('ADMIN_EMAIL'),
-        ], $values);
-        parent::__construct($values);
+        $config  = (new EnvVarConfigParser(
+            new Dotenv($rootDir),
+            new Loader(null),
+            "{$rootDir}/.env.example",
+            array_merge(
+                $values,
+                ['app.root_dir' => $rootDir]
+            )
+        ))->parseConfig();
+        parent::__construct($config);
 
-        // Register providers
-        $this->register(new Provider\SwiftmailerServiceProvider());
+        $this->register(new Provider\MailerServiceProvider());
+        $this->register(new SilexProvider\LocaleServiceProvider());
+        $this->register(new SilexProvider\TranslationServiceProvider());
+        $this->register(new SilexProvider\ValidatorServiceProvider());
         $this->register(new Provider\FormServiceProvider());
+        $this->register(new SilexProvider\TwigServiceProvider());
         $this->register(new SilexProvider\ServiceControllerServiceProvider());
-        $this->register(new Provider\ControllerServiceProvider());
+        $this->register(new FrameworkServiceProvider());
+    }
+
+    public function boot()
+    {
+        parent::boot();
+
+        // Register custom JSend error handler
+        $this->error(function (\Exception $e, Request $req, int $code): JSendErrorResponse {
+            $data = [];
+            if ($this['debug']) {
+                $data = [
+                    'class' => get_class($e),
+                    'file'  => $e->getFile(),
+                    'line'  => $e->getLine(),
+                    'trace' => $e->getTraceAsString(),
+                ];
+            }
+
+            return new JSendErrorResponse($e->getMessage(), $e->getCode(), $data, $code);
+        }, SilexApplication::LATE_EVENT);
     }
 }
