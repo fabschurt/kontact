@@ -1,11 +1,11 @@
 {% if name is defined %}
-  {{- 'kontact.label.name'|trans({}, 'kontact') }}: {{ name }}
+  {{- 'kontact.label.name'|trans }}: {{ name }}
 
 {% endif %}
 {% if address is defined %}
-  {{- 'kontact.label.address'|trans({}, 'kontact') }}: {{ address }}
+  {{- 'kontact.label.address'|trans }}: {{ address }}
 
 {% endif %}
-{{ 'kontact.label.message'|trans({}, 'kontact') }}:
+{{ 'kontact.label.message'|trans }}:
 
 {{ message }}
