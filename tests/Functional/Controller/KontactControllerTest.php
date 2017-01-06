@@ -21,26 +21,28 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class KontactControllerTest extends WebTestCase
 {
-    public function testPost()
+    /**
+     * @testdox ->postAction() ~ It returns a success JSend response and send a contact e-mail
+     */
+    public function testPostAction1()
     {
-        $this->specify('it should return a success JSend response and send a contact e-mail', function () {
-            $this->client->request(Request::METHOD_POST, '/post', [
-                'name'    => 'John Doe',
-                'address' => 'john.doe@example.org',
-                'message' => 'Hello, is it me you’re looking for?',
-            ]);
-            $response = $this->client->getResponse();
-            verify($response->isOk())->true();
-            verify(json_decode($response->getContent(), true))->same([
-                'status' => 'success',
-                'data'   => null,
-            ]);
-            verify($this->app['mailer.message_logger']->countMessages())->same(1);
-            $message = $this->app['mailer.message_logger']->getMessages()[0];
-            verify($message->getSubject())->same('Kontact');
-            verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
-            verify($message->getTo())->same(['jason.bourne@example.org' => false]);
-            verify($message->getBody())->same(<<<'BODY'
+        $this->client->request(Request::METHOD_POST, '/post', [
+            'name'    => 'John Doe',
+            'address' => 'john.doe@example.org',
+            'message' => 'Hello, is it me you’re looking for?',
+        ]);
+        $response = $this->client->getResponse();
+        verify($response->isOk())->true();
+        verify(json_decode($response->getContent(), true))->same([
+            'status' => 'success',
+            'data'   => null,
+        ]);
+        verify($this->app['mailer.message_logger']->countMessages())->same(1);
+        $message = $this->app['mailer.message_logger']->getMessages()[0];
+        verify($message->getSubject())->same('Kontact');
+        verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
+        verify($message->getTo())->same(['jason.bourne@example.org' => null]);
+        verify($message->getBody())->same(<<<'BODY'
 Name: John Doe
 
 E-mail address: john.doe@example.org
@@ -50,43 +52,50 @@ Message:
 Hello, is it me you’re looking for?
 
 BODY
-            );
-        });
+        );
+    }
 
-        $this->specify('it should return a fail JSend response if there are blank request params', function () {
-            $this->client->request(Request::METHOD_POST, '/post', [
-                'name'    => '',
-                'address' => null,
-                'message' => '',
-            ]);
-            $response = $this->client->getResponse();
-            verify($response->isOk())->true();
-            verify(json_decode($response->getContent(), true))->same([
-                'status' => 'fail',
-                'data'   => [
-                    'name'    => ['This value should not be blank.'],
-                    'address' => ['This value should not be blank.'],
-                    'message' => ['This value should not be blank.'],
-                ],
-            ]);
-            verify($this->app['mailer.message_logger']->countMessages())->same(0);
-        });
+    /**
+     * @testdox ->postAction() ~ It returns a fail JSend response if there are blank request params
+     */
+    public function testPostAction2()
+    {
+        $this->client->request(Request::METHOD_POST, '/post', [
+            'name'    => '',
+            'address' => null,
+            'message' => '',
+        ]);
+        $response = $this->client->getResponse();
+        verify($response->isOk())->true();
+        verify(json_decode($response->getContent(), true))->same([
+            'status' => 'fail',
+            'data'   => [
+                'name'    => ['This value should not be blank.'],
+                'address' => ['This value should not be blank.'],
+                'message' => ['This value should not be blank.'],
+            ],
+        ]);
+        verify($this->app['mailer.message_logger']->countMessages())->same(0);
+    }
 
-        $this->specify('it should return a fail JSend response if there are extraneous request params', function () {
-            $this->client->request(Request::METHOD_POST, '/post', [
-                'message'          => 'Hi, I’m Jane Doe.',
-                'extraneous_param' => 'Forbidden',
-            ]);
-            $response = $this->client->getResponse();
-            verify($response->isOk())->true();
-            verify(json_decode($response->getContent(), true))->same([
-                'status' => 'fail',
-                'data'   => [
-                    'errors' => ['This form should not contain extra fields.'],
-                ],
-            ]);
-            verify($this->app['mailer.message_logger']->countMessages())->same(0);
-        });
+    /**
+     * @testdox ->postAction() ~ It returns a fail JSend response if there are extraneous request params
+     */
+    public function testPostAction3()
+    {
+        $this->client->request(Request::METHOD_POST, '/post', [
+            'message'          => 'Hi, I’m Jane Doe.',
+            'extraneous_param' => 'Forbidden',
+        ]);
+        $response = $this->client->getResponse();
+        verify($response->isOk())->true();
+        verify(json_decode($response->getContent(), true))->same([
+            'status' => 'fail',
+            'data'   => [
+                'errors' => ['This form should not contain extra fields.'],
+            ],
+        ]);
+        verify($this->app['mailer.message_logger']->countMessages())->same(0);
     }
 
     /**
@@ -95,10 +104,9 @@ BODY
     public function createApplication(): Application
     {
         $app = new Application([
-            'environment'   => 'test',
-            'load_env_file' => false,
-            'debug'         => true,
-            'admin_email'   => 'jason.bourne@example.org',
+            'environment' => 'test',
+            'debug'       => true,
+            'admin_email' => 'jason.bourne@example.org',
         ]);
         unset($app['exception_handler']);
         $app['swiftmailer.use_spool'] = false;
@@ -118,8 +126,10 @@ BODY
      */
     protected function setUp()
     {
-        $this->specifyConfig()->shallowClone();
+        $this->setBeStrictAboutChangesToGlobalState(false);
+
         parent::setUp();
+
         $this->client = $this->createClient();
     }
 }
