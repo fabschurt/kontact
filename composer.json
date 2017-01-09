@@ -60,7 +60,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "git@github.com:fabschurt/nomo-spaco"
+      "url": "https://github.com/fabschurt/nomo-spaco"
     }
   ],
   "extra": {

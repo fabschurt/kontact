@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "45eb782a9c49bf5b4d829511c18344d6",
-    "content-hash": "c58f347ec1251dbd6792ad521849af4e",
+    "hash": "cbdcb4f29991a83c29fe0ac6a52053be",
+    "content-hash": "3aef60c27bdfcca9e8749ea54ceb9b50",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -321,7 +321,7 @@
             "version": "dev-fix-classname-visitors",
             "source": {
                 "type": "git",
-                "url": "git@github.com:fabschurt/nomo-spaco",
+                "url": "https://github.com/fabschurt/nomo-spaco",
                 "reference": "2f48409797482f18ba62bae2491a3965397c0dd1"
             },
             "require": {
