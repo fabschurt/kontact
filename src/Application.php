@@ -43,7 +43,7 @@ final class Application extends SilexApplication
         parent::__construct($config);
 
         $this->register(new Provider\MailerServiceProvider());
-        $this->register(new SilexProvider\LocaleServiceProvider());
+        $this->register(new SilexProvider\LocaleServiceProvider(), ['locale' => $this['locale']]);
         $this->register(new SilexProvider\TranslationServiceProvider());
         $this->register(new SilexProvider\ValidatorServiceProvider());
         $this->register(new Provider\FormServiceProvider());
@@ -69,6 +69,6 @@ final class Application extends SilexApplication
             }
 
             return new JSendErrorResponse($e->getMessage(), $e->getCode(), $data, $code);
-        }, SilexApplication::LATE_EVENT);
+        }, SilexApplication::EARLY_EVENT);
     }
 }
