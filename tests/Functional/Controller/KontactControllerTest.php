@@ -43,11 +43,11 @@ final class KontactControllerTest extends WebTestCase
         verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
         verify($message->getTo())->same(['jason.bourne@example.org' => null]);
         verify($message->getBody())->same(<<<'BODY'
-Name: John Doe
+Name : John Doe
 
-E-mail address: john.doe@example.org
+E-mail address : john.doe@example.org
 
-Message:
+Message :
 
 Hello, is it me you’re looking for?
 
@@ -106,6 +106,7 @@ BODY
         $app = new Application([
             'environment' => 'test',
             'debug'       => true,
+            'locale'      => 'en',
             'admin_email' => 'jason.bourne@example.org',
         ]);
         unset($app['exception_handler']);
