@@ -103,6 +103,30 @@ BODY
     }
 
     /**
+     *
+     * @testdox ->postAction() ~ The sent e-mail is customizable via application params
+     */
+    public function testPostAction4()
+    {
+        $this->app['mailer.message.subject']           = 'What time is it?';
+        $this->app['mailer.message.sender_address']    = 'finn@ooo.land';
+        $this->app['mailer.message.sender_name']       = 'Finn the human';
+        $this->app['mailer.message.recipient_address'] = 'jake@ooo.land';
+        $this->app['mailer.message.recipient_name']    = 'Jake the dog';
+
+        $this->client->request(Request::METHOD_POST, '/post', ['message' => 'Adventure Time!']);
+        $response = $this->client->getResponse();
+
+        verify($response->isOk())->true();
+        verify($this->app['mailer.message_logger']->countMessages())->same(1);
+
+        $message = $this->app['mailer.message_logger']->getMessages()[0];
+        verify($message->getSubject())->same('What time is it?');
+        verify($message->getFrom())->same(['finn@ooo.land' => 'Finn the human']);
+        verify($message->getTo())->same(['jake@ooo.land' => 'Jake the dog']);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function createApplication(): Application
