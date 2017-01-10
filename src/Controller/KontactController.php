@@ -33,7 +33,7 @@ final class KontactController
     {
         $form = $app['form.factory']->createNamed('', KontactType::class);
         $form->handleRequest($req);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $app['mailer']->send($app['mailer.message.factory']($form->getData()));
 
             return new JSendSuccessResponse();
