@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# This file is part of the fabschurt/kontact package.
+#
+# (c) 2016 Fabien Schurter <fabien@fabschurt.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+is_dev()
+{
+  [[ $ENVIRONMENT == 'dev' ]] && return $(true) || return $(false)
+}
+
+install_php_dependencies()
+{
+  printf '\n*** Installing PHP dependencies ***\n\n'
+  composer install --prefer-dist $(is_dev || echo '--no-dev --no-interaction --optimize-autoloader')
+}
+
+build()
+{
+  install_php_dependencies
+}
+
+set -e -o pipefail
+build

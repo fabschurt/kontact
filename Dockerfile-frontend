@@ -1,0 +1,4 @@
+FROM fabschurt/nginx
+MAINTAINER Fabien Schurter <fabien@fabschurt.com>
+
+COPY config/nginx/frontend.conf /etc/nginx/conf.d

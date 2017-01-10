@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        ENVIRONMENT: dev
+    env_file: .env
+    volumes:
+      - ./src:/opt/codebase/src
+      - ./app:/opt/codebase/app
+      - ./vendor:/opt/codebase/vendor
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend
+    ports:
+      - '80:80'
+    depends_on:
+      - app

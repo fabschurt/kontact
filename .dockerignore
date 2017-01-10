@@ -1,0 +1,12 @@
+*
+!app/
+!bin/
+!config/
+!src/
+!var/
+!web/
+var/*/*
+**/.*
+!composer.*
+!LICENSE
+!.env.example
