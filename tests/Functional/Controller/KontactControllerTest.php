@@ -32,12 +32,14 @@ final class KontactControllerTest extends WebTestCase
             'message' => 'Hello, is it me you’re looking for?',
         ]);
         $response = $this->client->getResponse();
+
         verify($response->isOk())->true();
         verify(json_decode($response->getContent(), true))->same([
             'status' => 'success',
             'data'   => null,
         ]);
         verify($this->app['mailer.message_logger']->countMessages())->same(1);
+
         $message = $this->app['mailer.message_logger']->getMessages()[0];
         verify($message->getSubject())->same('Kontact');
         verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
@@ -66,6 +68,7 @@ BODY
             'message' => '',
         ]);
         $response = $this->client->getResponse();
+
         verify($response->isOk())->true();
         verify(json_decode($response->getContent(), true))->same([
             'status' => 'fail',
@@ -88,6 +91,7 @@ BODY
             'extraneous_param' => 'Forbidden',
         ]);
         $response = $this->client->getResponse();
+
         verify($response->isOk())->true();
         verify(json_decode($response->getContent(), true))->same([
             'status' => 'fail',
