@@ -55,8 +55,8 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
                 return \Swift_Message::newInstance()
                     ->setSubject($container['mailer.message.subject'] ?: 'Kontact')
                     ->setFrom(
-                        $data['address'] ?? $container['mailer.message.default_sender_address'] ?: $container['admin_email'],
-                        $data['name'] ?? $container['mailer.message.default_sender_name']
+                        $data['address'] ?? $container['mailer.message.sender_address'] ?: $container['admin_email'],
+                        $data['name'] ?? $container['mailer.message.sender_name']
                     )
                     ->setTo(
                         $container['mailer.message.recipient_address'] ?: $container['admin_email'],
