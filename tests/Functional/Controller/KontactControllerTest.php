@@ -108,11 +108,11 @@ BODY
      */
     public function testPostAction4()
     {
-        $this->app['mailer.message.subject']           = 'What time is it?';
-        $this->app['mailer.message.sender_address']    = 'finn@ooo.land';
-        $this->app['mailer.message.sender_name']       = 'Finn the human';
-        $this->app['mailer.message.recipient_address'] = 'jake@ooo.land';
-        $this->app['mailer.message.recipient_name']    = 'Jake the dog';
+        $this->app['mailer.message.subject']      = 'What time is it?';
+        $this->app['mailer.message.from_address'] = 'finn@ooo.land';
+        $this->app['mailer.message.from_name']    = 'Finn the human';
+        $this->app['mailer.message.to_address']   = 'jake@ooo.land';
+        $this->app['mailer.message.to_name']      = 'Jake the dog';
 
         $this->client->request(Request::METHOD_POST, '/post', ['message' => 'Adventure Time!']);
         $response = $this->client->getResponse();
