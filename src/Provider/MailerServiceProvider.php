@@ -28,18 +28,16 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
     public function register(Container $container)
     {
         // Register original provider
-        if (!isset($container['mailer'])) {
-            $container->register(new SilexProvider\SwiftmailerServiceProvider(), [
-                'swiftmailer.options' => [
-                    'host'       => $container['mailer.host'],
-                    'port'       => $container['mailer.port'] ?: 25,
-                    'username'   => $container['mailer.username'],
-                    'password'   => $container['mailer.password'],
-                    'encryption' => $container['mailer.encryption'],
-                    'auth_mode'  => $container['mailer.auth_mode'],
-                ],
-            ]);
-        }
+        $container->register(new SilexProvider\SwiftmailerServiceProvider(), [
+            'swiftmailer.options' => [
+                'host'       => $container['mailer.host'],
+                'port'       => $container['mailer.port'],
+                'username'   => $container['mailer.username'],
+                'password'   => $container['mailer.password'],
+                'encryption' => $container['mailer.encryption'],
+                'auth_mode'  => $container['mailer.auth_mode'],
+            ],
+        ]);
 
         // Services
         $container['mailer.message.factory'] = $container->protect(
@@ -53,13 +51,13 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
              */
             function (array $data) use ($container): \Swift_Message {
                 return \Swift_Message::newInstance()
-                    ->setSubject($container['mailer.message.subject'] ?: 'Kontact')
+                    ->setSubject($container['mailer.message.subject'])
                     ->setFrom(
-                        $data['address'] ?? $container['mailer.message.from_address'] ?: $container['admin_email'],
+                        $data['address'] ?? $container['mailer.message.from_address'],
                         $data['name'] ?? $container['mailer.message.from_name']
                     )
                     ->setTo(
-                        $container['mailer.message.to_address'] ?: $container['admin_email'],
+                        $container['mailer.message.to_address'],
                         $container['mailer.message.to_name']
                     )
                     ->setBody($container['twig']->render('message.txt.twig', $data))

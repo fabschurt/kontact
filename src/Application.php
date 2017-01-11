@@ -31,16 +31,20 @@ final class Application extends SilexApplication
     public function __construct(array $values = [])
     {
         $rootDir = __DIR__.'/..';
-        $config  = (new EnvVarConfigParser(
-            new Dotenv($rootDir),
-            new Loader(null),
-            "{$rootDir}/.env.example",
-            array_merge(
-                $values,
-                ['app.root_dir' => $rootDir]
-            )
+        $params  = (new EnvVarConfigParser(
+            $rootDir,
+            array_merge(['app.root_dir' => $rootDir], $values),
+            [
+                'environment'            => 'prod',
+                'locale'                 => 'en',
+                'mailer.port'            => 25,
+                'mailer.message.subject' => 'Kontact',
+            ]
         ))->parseConfig();
-        parent::__construct($config);
+        $params['mailer.message.from_address'] = $params['mailer.message.from_address'] ?: $params['admin_email'];
+        $params['mailer.message.to_address']   = $params['mailer.message.to_address']   ?: $params['admin_email'];
+        $params['debug'] = in_array($params['environment'], ['dev', 'test'], true);
+        parent::__construct($params);
 
         $this->register(new Provider\MailerServiceProvider());
         $this->register(new SilexProvider\LocaleServiceProvider(), ['locale' => $this['locale']]);

@@ -27,9 +27,7 @@ final class FormServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         // Register original provider
-        if (!isset($container['form.factory'])) {
-            $container->register(new SilexProvider\FormServiceProvider());
-        }
+        $container->register(new SilexProvider\FormServiceProvider());
 
         // Parameters
         $container['form.kontact.max_message_length'] = 16384;

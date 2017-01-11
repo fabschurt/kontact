@@ -133,7 +133,6 @@ BODY
     {
         $app = new Application([
             'environment' => 'test',
-            'debug'       => true,
             'locale'      => 'en',
             'admin_email' => 'jason.bourne@example.org',
         ]);
