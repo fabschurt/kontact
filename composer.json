@@ -1,6 +1,6 @@
 {
   "name": "fabschurt/kontact",
-  "description": "Contact form backend for static websites.",
+  "description": "A contact form backend for static websites.",
   "type": "project",
   "homepage": "https://github.com/fabschurt/kontact",
   "keywords": ["contact", "backend", "static", "website"],
@@ -32,7 +32,6 @@
     "symfony/validator": "^2.8|^3.0",
     "swiftmailer/swiftmailer": "^5.4",
     "twig/twig": "^1.27",
-    "vlucas/phpdotenv": "^2.4",
     "fabschurt/php-utils": "^1.0@dev",
     "fabschurt/silex-provider-framework": "^1.0@dev",
     "junker/symfony-jsend-response": "^0.1",

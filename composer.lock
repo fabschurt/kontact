@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cbdcb4f29991a83c29fe0ac6a52053be",
-    "content-hash": "3aef60c27bdfcca9e8749ea54ceb9b50",
+    "hash": "b3ddf3793d97cd795d35d775b0ec704d",
+    "content-hash": "32d5cc4c38cc269fc28333e24badaccc",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -186,12 +186,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabschurt/php-utils.git",
-                "reference": "8057afedb9087d9bb1274d445bf62a3ca815fa5f"
+                "reference": "537d7a7b9215a7cc3654b816603fd8840b6f7328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabschurt/php-utils/zipball/8057afedb9087d9bb1274d445bf62a3ca815fa5f",
-                "reference": "8057afedb9087d9bb1274d445bf62a3ca815fa5f",
+                "url": "https://api.github.com/repos/fabschurt/php-utils/zipball/537d7a7b9215a7cc3654b816603fd8840b6f7328",
+                "reference": "537d7a7b9215a7cc3654b816603fd8840b6f7328",
                 "shasum": ""
             },
             "require": {
@@ -237,7 +237,7 @@
                 "tools",
                 "utility"
             ],
-            "time": "2017-01-06 13:21:12"
+            "time": "2017-01-11 01:42:29"
         },
         {
             "name": "fabschurt/silex-provider-framework",
