@@ -14,7 +14,7 @@ RUN apk update --no-cache && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     ./bin/build backend && \
     chgrp -R php-fpm app src var vendor web .env.example && \
-    chmod -R g+r app src var vendor web .env.example && \
+    chmod -R g+rX app src var vendor web .env.example && \
     chmod -R g+w var && \
     apk del --purge \
       bash \
