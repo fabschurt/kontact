@@ -34,10 +34,7 @@ final class KontactController
         $form = $app['form.factory']->createNamed('', KontactType::class);
         $form->handleRequest($req);
         if ($form->isSubmitted() && $form->isValid()) {
-            $sentCount = $app['mailer']->send($app['mailer.message.factory']($form->getData()));
-            if (!$sentCount) {
-                $this->abort(500, 'There has been an error when trying to send the e-mail.');
-            }
+            $app['mailer']->send($app['mailer.message.factory']($form->getData()));
 
             return new JSendSuccessResponse();
         }
