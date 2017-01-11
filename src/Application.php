@@ -30,16 +30,17 @@ final class Application extends SilexApplication
      */
     public function __construct(array $values = [])
     {
-        $rootDir = __DIR__.'/..';
-        $params  = (new EnvVarConfigParser(
+        $rootDir  = __DIR__.'/..';
+        $defaults = [
+            'environment'            => 'prod',
+            'locale'                 => 'en',
+            'mailer.port'            => 25,
+            'mailer.message.subject' => 'Kontact',
+        ];
+        $params = (new EnvVarConfigParser(
             $rootDir,
             array_merge(['app.root_dir' => $rootDir], $values),
-            [
-                'environment'            => 'prod',
-                'locale'                 => 'en',
-                'mailer.port'            => 25,
-                'mailer.message.subject' => 'Kontact',
-            ]
+            $defaults
         ))->parseConfig();
         $params['mailer.message.from_address'] = $params['mailer.message.from_address'] ?: $params['admin_email'];
         $params['mailer.message.to_address']   = $params['mailer.message.to_address']   ?: $params['admin_email'];
@@ -60,7 +61,6 @@ final class Application extends SilexApplication
     {
         parent::boot();
 
-        // Register custom JSend error handler
         $this->error(function (\Exception $e, Request $req, int $code): JSendErrorResponse {
             $data = [];
             if ($this['debug']) {
