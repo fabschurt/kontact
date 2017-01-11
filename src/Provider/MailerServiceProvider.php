@@ -40,8 +40,8 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
 
         $container['mailer.message.factory'] = $container->protect(
             /**
-             * Returns a pre-configured `\Swift_Message` instance, drawing some
-             * defaults from validated form data.
+             * Returns a pre-configured `\Swift_Message` instance, drawing body
+             * content context from validated form data.
              *
              * @param array $data The data array from the validated form
              *
@@ -50,14 +50,8 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
             function (array $data) use ($container): \Swift_Message {
                 return \Swift_Message::newInstance()
                     ->setSubject($container['mailer.message.subject'])
-                    ->setFrom(
-                        $data['address'] ?? $container['mailer.message.from_address'],
-                        $data['name'] ?? $container['mailer.message.from_name']
-                    )
-                    ->setTo(
-                        $container['mailer.message.to_address'],
-                        $container['mailer.message.to_name']
-                    )
+                    ->setFrom($container['mailer.message.from_address'], $container['mailer.message.from_name'])
+                    ->setTo($container['mailer.message.to_address'], $container['mailer.message.to_name'])
                     ->setBody($container['twig']->render('message.txt.twig', $data))
                     ->setContentType('text/plain')
                 ;
