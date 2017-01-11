@@ -26,19 +26,17 @@ final class FormServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        // Register original provider
         $container->register(new SilexProvider\FormServiceProvider());
 
-        // Parameters
         $container['form.kontact.max_message_length'] = 16384;
 
-        // Services
         $container['form.type.kontact'] = function (Container $container): KontactType {
             return new KontactType(
                 $container['request_stack']->getCurrentRequest()->request->all(),
                 $container['form.kontact.max_message_length']
             );
         };
+
         $container->extend('form.types', function (array $types, Container $container): array {
             $types[] = $container['form.type.kontact'];
 

@@ -27,7 +27,6 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
      */
     public function register(Container $container)
     {
-        // Register original provider
         $container->register(new SilexProvider\SwiftmailerServiceProvider(), [
             'swiftmailer.options' => [
                 'host'       => $container['mailer.host'],
@@ -39,7 +38,6 @@ final class MailerServiceProvider implements ServiceProviderInterface, BootableP
             ],
         ]);
 
-        // Services
         $container['mailer.message.factory'] = $container->protect(
             /**
              * Returns a pre-configured `\Swift_Message` instance, drawing some
