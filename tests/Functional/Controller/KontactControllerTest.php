@@ -103,7 +103,6 @@ BODY
     }
 
     /**
-     *
      * @testdox ->postAction() ~ The sent e-mail is customizable via application params
      */
     public function testPostAction4()
@@ -113,7 +112,6 @@ BODY
         $this->app['mailer.message.from_name']    = 'Finn the human';
         $this->app['mailer.message.to_address']   = 'jake@ooo.land';
         $this->app['mailer.message.to_name']      = 'Jake the dog';
-
         $this->client->request(Request::METHOD_POST, '/post', ['message' => 'Adventure Time!']);
         $response = $this->client->getResponse();
 
