@@ -13,6 +13,7 @@ namespace FabSchurt\Kontact;
 
 use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
 use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
+use Monolog\Logger;
 use Silex\Application as SilexApplication;
 use Silex\Provider as SilexProvider;
 
@@ -53,6 +54,9 @@ final class Application extends SilexApplication
         $this->register(new SilexProvider\TwigServiceProvider());
         $this->register(new SilexProvider\ServiceControllerServiceProvider());
         $this->register(new Provider\ViewServiceProvider());
+        $this->register(new SilexProvider\MonologServiceProvider(), [
+            'monolog.level' => $this['debug'] ? Logger::DEBUG : Logger::ERROR,
+        ]);
         $this->register(new FrameworkServiceProvider());
     }
 }
