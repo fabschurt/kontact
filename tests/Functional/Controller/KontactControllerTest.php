@@ -42,7 +42,7 @@ final class KontactControllerTest extends WebTestCase
 
         $message = $this->app['mailer.message_logger']->getMessages()[0];
         verify($message->getSubject())->same('Kontact');
-        verify($message->getFrom())->same(['john.doe@example.org' => 'John Doe']);
+        verify($message->getFrom())->same(['jason.bourne@example.org' => null]);
         verify($message->getTo())->same(['jason.bourne@example.org' => null]);
         verify($message->getBody())->same(<<<'BODY'
 Name : John Doe
