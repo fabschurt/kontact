@@ -142,7 +142,11 @@ BODY
         $app['mailer.message_logger'] = function (): \Swift_Plugins_MessageLogger {
             return new \Swift_Plugins_MessageLogger();
         };
-        $app['mailer']->registerPlugin($app['mailer.message_logger']);
+        $app->extend('mailer', function (\Swift_Mailer $mailer) use ($app): \Swift_Mailer {
+            $mailer->registerPlugin($app['mailer.message_logger']);
+
+            return $mailer;
+        });
 
         return $app;
     }
