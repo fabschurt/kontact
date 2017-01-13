@@ -13,10 +13,8 @@ namespace FabSchurt\Kontact;
 
 use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
 use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
-use Junker\Symfony\JSendErrorResponse;
 use Silex\Application as SilexApplication;
 use Silex\Provider as SilexProvider;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
@@ -54,25 +52,7 @@ final class Application extends SilexApplication
         $this->register(new Provider\FormServiceProvider());
         $this->register(new SilexProvider\TwigServiceProvider());
         $this->register(new SilexProvider\ServiceControllerServiceProvider());
+        $this->register(new Provider\ViewServiceProvider());
         $this->register(new FrameworkServiceProvider());
-    }
-
-    public function boot()
-    {
-        parent::boot();
-
-        $this->error(function (\Exception $e, Request $req, int $code): JSendErrorResponse {
-            $data = [];
-            if ($this['debug']) {
-                $data = [
-                    'class' => get_class($e),
-                    'file'  => $e->getFile(),
-                    'line'  => $e->getLine(),
-                    'trace' => $e->getTraceAsString(),
-                ];
-            }
-
-            return new JSendErrorResponse($e->getMessage(), $e->getCode(), $data, $code);
-        }, SilexApplication::EARLY_EVENT);
     }
 }
