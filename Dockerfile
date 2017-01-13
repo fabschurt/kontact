@@ -24,3 +24,5 @@ RUN apk update --no-cache && \
     rm -rf /var/cache/apk/*        \
            /root/.composer/cache/* \
            /usr/local/bin/composer
+
+VOLUME /opt/codebase/var/log
