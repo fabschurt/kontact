@@ -11,8 +11,6 @@
 
 namespace FabSchurt\Kontact;
 
-use Dotenv\Dotenv;
-use Dotenv\Loader;
 use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
 use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
 use Junker\Symfony\JSendErrorResponse;
@@ -43,12 +41,14 @@ final class Application extends SilexApplication
             $defaults
         ))->parseConfig();
         $params['mailer.message.from_address'] = $params['mailer.message.from_address'] ?: $params['admin_email'];
-        $params['mailer.message.to_address']   = $params['mailer.message.to_address']   ?: $params['admin_email'];
+        $params['mailer.message.to_address']   = $params['mailer.message.to_address'] ?: $params['admin_email'];
         $params['debug'] = in_array($params['environment'], ['dev', 'test'], true);
         parent::__construct($params);
 
         $this->register(new Provider\MailerServiceProvider());
-        $this->register(new SilexProvider\LocaleServiceProvider(), ['locale' => $this['locale']]);
+        $this->register(new SilexProvider\LocaleServiceProvider(), [
+            'locale' => $this['locale'],
+        ]);
         $this->register(new SilexProvider\TranslationServiceProvider());
         $this->register(new SilexProvider\ValidatorServiceProvider());
         $this->register(new Provider\FormServiceProvider());
