@@ -13,6 +13,7 @@ namespace FabSchurt\Kontact\Tests\Functional\Controller;
 
 use FabSchurt\Kontact\Application;
 use Pimple\Container;
+use Silex\Application as SilexApplication;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -125,16 +126,73 @@ BODY
     }
 
     /**
+     * @param string $captchaValue
+     * @param bool   $mailWasSent
+     * @param array  $expectedResponse
+     *
+     * @dataProvider provideDataForTestPostAction5
+     *
+     * @testdox ->postAction() ~ The form can be protected by a captcha
+     */
+    public function testPostAction5(string $captchaValue, bool $mailWasSent, array $expectedResponse)
+    {
+        $this->app->before(function (Request $req, SilexApplication $app) {
+            $app['captcha']->generate('4-8-15-16-23-42');
+        });
+        $this->client->request(Request::METHOD_POST, '/post', [
+            'message' => 'Message in a bottle.',
+            'captcha' => $captchaValue,
+        ]);
+        $response = $this->client->getResponse();
+
+        verify($response->isOk())->true();
+        verify($this->app['mailer.message_logger']->countMessages())->same((int) $mailWasSent);
+        verify(json_decode($response->getContent(), true))->same($expectedResponse);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideDataForTestPostAction5(): array
+    {
+        return [
+            ['', false, [
+                'status' => 'fail',
+                'data' => [
+                    'captcha' => [
+                        'This value should not be blank.',
+                        'Invalid captcha value.',
+                    ],
+                ],
+            ]],
+            ['zbleurg', false, [
+                'status' => 'fail',
+                'data' => [
+                    'captcha' => [
+                        'Invalid captcha value.',
+                    ],
+                ],
+            ]],
+            ['4-8-15-16-23-42', true, [
+                'status' => 'success',
+                'data' => null,
+            ]],
+        ];
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function createApplication(): Application
     {
         $app = new Application([
-            'environment' => 'test',
-            'locale'      => 'en',
-            'admin_email' => 'jason.bourne@example.org',
+            'environment'    => 'test',
+            'locale'         => 'en',
+            'admin_email'    => 'jason.bourne@example.org',
+            'enable_captcha' => $this->getName(false) === 'testPostAction5',
         ]);
         unset($app['exception_handler']);
+
         $app['swiftmailer.use_spool'] = false;
         $app['swiftmailer.transport'] = function (Container $container): \Swift_Transport {
             return new \Swift_Transport_NullTransport($container['swiftmailer.transport.eventdispatcher']);

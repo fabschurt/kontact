@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d99aba15de8eb24afa3b359927bda6a5",
-    "content-hash": "a6d6db6167f1312aab1093dea2db81c9",
+    "hash": "28690bf6d4e00f85c79772b62383a7f6",
+    "content-hash": "b4e5748fab98a5b04fb602527a243cfe",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -240,17 +240,89 @@
             "time": "2017-01-11 01:42:29"
         },
         {
+            "name": "fabschurt/silex-provider-captcha",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fabschurt/silex-provider-captcha.git",
+                "reference": "ff75444f495c309f3ce720010e1ef1c37288a837"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fabschurt/silex-provider-captcha/zipball/ff75444f495c309f3ce720010e1ef1c37288a837",
+                "reference": "ff75444f495c309f3ce720010e1ef1c37288a837",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "gregwar/captcha": "^1.1",
+                "php": "^5.6|^7.0",
+                "pimple/pimple": "^3.0",
+                "silex/silex": "^2.0",
+                "symfony/form": "^2.8|^3.0",
+                "symfony/http-foundation": "^2.8|^3.0",
+                "symfony/options-resolver": "^2.8|^3.0",
+                "symfony/validator": "^2.8|^3.0"
+            },
+            "require-dev": {
+                "codeception/specify": "^0.4",
+                "codeception/verify": "^0.3",
+                "consolidation/robo": "^1.0",
+                "friendsofphp/php-cs-fixer": "^1.12",
+                "phpunit/php-invoker": "^1.1",
+                "phpunit/phpunit": "^5.6",
+                "symfony/browser-kit": "^2.8|^3.0",
+                "symfony/config": "^2.8|^3.0",
+                "symfony/css-selector": "^2.8|^3.0",
+                "symfony/dom-crawler": "^2.8|^3.0",
+                "symfony/translation": "^2.8|^3.0",
+                "symfony/twig-bridge": "^2.8|^3.0",
+                "twig/twig": "^1.27"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FabSchurt\\Silex\\Provider\\Captcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Schurter",
+                    "email": "fabien@fabschurt.com",
+                    "homepage": "http://fabschurt.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Captcha service provider for Silex 2.",
+            "homepage": "https://github.com/fabschurt/silex-provider-captcha",
+            "keywords": [
+                "captcha",
+                "provider",
+                "silex"
+            ],
+            "time": "2017-01-14 11:09:00"
+        },
+        {
             "name": "fabschurt/silex-provider-framework",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabschurt/silex-provider-framework.git",
-                "reference": "a4e2a6f802e5e299476802c4180515a6f119a6af"
+                "reference": "251b509df3735f481a7ed61d0256e4060e9c4333"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabschurt/silex-provider-framework/zipball/a4e2a6f802e5e299476802c4180515a6f119a6af",
-                "reference": "a4e2a6f802e5e299476802c4180515a6f119a6af",
+                "url": "https://api.github.com/repos/fabschurt/silex-provider-framework/zipball/251b509df3735f481a7ed61d0256e4060e9c4333",
+                "reference": "251b509df3735f481a7ed61d0256e4060e9c4333",
                 "shasum": ""
             },
             "require": {
@@ -314,7 +386,7 @@
                 "provider",
                 "silex"
             ],
-            "time": "2017-01-13 14:28:36"
+            "time": "2017-01-14 11:04:48"
         },
         {
             "name": "gnugat/nomo-spaco",
@@ -362,6 +434,54 @@
                 "fully qualified classname"
             ],
             "time": "2017-01-05 15:58:31"
+        },
+        {
+            "name": "gregwar/captcha",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/Captcha.git",
+                "reference": "1240ab993ca713680573b2d4166900da5f758623"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/1240ab993ca713680573b2d4166900da5f758623",
+                "reference": "1240ab993ca713680573b2d4166900da5f758623",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "captcha",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\Captcha\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/Gregwar/Captcha",
+            "keywords": [
+                "bot",
+                "captcha",
+                "spam"
+            ],
+            "time": "2015-09-11 15:23:20"
         },
         {
             "name": "junker/symfony-jsend-response",
@@ -4420,6 +4540,7 @@
     "stability-flags": {
         "fabschurt/php-utils": 20,
         "fabschurt/silex-provider-framework": 20,
+        "fabschurt/silex-provider-captcha": 20,
         "gnugat/nomo-spaco": 20
     },
     "prefer-stable": true,

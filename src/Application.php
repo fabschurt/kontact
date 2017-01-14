@@ -12,6 +12,7 @@
 namespace FabSchurt\Kontact;
 
 use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
+use FabSchurt\Silex\Provider\Captcha\CaptchaServiceProvider;
 use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
 use Monolog\Logger;
 use Silex\Application as SilexApplication;
@@ -33,6 +34,7 @@ final class Application extends SilexApplication
             'locale'                 => 'en',
             'mailer.port'            => 25,
             'mailer.message.subject' => 'Kontact',
+            'enable_captcha'         => true,
         ];
         $params = (new EnvVarConfigParser(
             $rootDir,
@@ -58,5 +60,25 @@ final class Application extends SilexApplication
             'monolog.level' => $this['debug'] ? Logger::DEBUG : Logger::ERROR,
         ]);
         $this->register(new FrameworkServiceProvider());
+        if ($this['enable_captcha']) {
+            $this->enableCaptcha();
+        }
+    }
+
+    /**
+     * Registers and mounts the captcha provider.
+     */
+    public function enableCaptcha()
+    {
+        if (isset($this['captcha'])) {
+            return;
+        }
+
+        $captchaProvider = new CaptchaServiceProvider();
+        $this->register(new SilexProvider\SessionServiceProvider(), [
+            'session.test' => $this['environment'] === 'test',
+        ]);
+        $this->register($captchaProvider);
+        $this->mount('', $captchaProvider);
     }
 }

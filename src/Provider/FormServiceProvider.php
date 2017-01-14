@@ -33,7 +33,8 @@ final class FormServiceProvider implements ServiceProviderInterface
         $container['form.type.kontact'] = function (Container $container): KontactType {
             return new KontactType(
                 $container['request_stack']->getCurrentRequest()->request->all(),
-                $container['form.kontact.max_message_length']
+                $container['form.kontact.max_message_length'],
+                $container['enable_captcha']
             );
         };
 
