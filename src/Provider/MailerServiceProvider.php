@@ -55,13 +55,5 @@ final class MailerServiceProvider implements ServiceProviderInterface
                 ;
             }
         );
-
-        $container->extend('mailer', function (\Swift_Mailer $mailer, Container $container): \Swift_Mailer {
-            if ($container['environment'] === 'dev') {
-                $mailer->registerPlugin(new \Swift_Plugins_RedirectingPlugin($container['admin_email']));
-            }
-
-            return $mailer;
-        });
     }
 }
