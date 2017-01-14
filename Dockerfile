@@ -7,9 +7,10 @@ COPY . /opt/codebase
 WORKDIR /opt/codebase
 RUN apk update --no-cache && \
     apk add \
-      bash \
-      git  \
-      curl \
+      bash    \
+      git     \
+      curl    \
+      php7-gd \
     && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     ./bin/build backend && \
