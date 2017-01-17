@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28690bf6d4e00f85c79772b62383a7f6",
-    "content-hash": "b4e5748fab98a5b04fb602527a243cfe",
+    "hash": "f1b6e24f4d9b1e076678b0458a2631c2",
+    "content-hash": "6b4385c17fff4012b37455d8ebbc2edd",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -317,12 +317,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabschurt/silex-provider-framework.git",
-                "reference": "251b509df3735f481a7ed61d0256e4060e9c4333"
+                "reference": "366edec200e18698e3e553acffc0000d38a00777"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabschurt/silex-provider-framework/zipball/251b509df3735f481a7ed61d0256e4060e9c4333",
-                "reference": "251b509df3735f481a7ed61d0256e4060e9c4333",
+                "url": "https://api.github.com/repos/fabschurt/silex-provider-framework/zipball/366edec200e18698e3e553acffc0000d38a00777",
+                "reference": "366edec200e18698e3e553acffc0000d38a00777",
                 "shasum": ""
             },
             "require": {
@@ -386,15 +386,15 @@
                 "provider",
                 "silex"
             ],
-            "time": "2017-01-14 11:04:48"
+            "time": "2017-01-14 21:42:35"
         },
         {
             "name": "gnugat/nomo-spaco",
-            "version": "dev-fix-classname-visitors",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fabschurt/nomo-spaco",
-                "reference": "2f48409797482f18ba62bae2491a3965397c0dd1"
+                "url": "https://github.com/gnugat/nomo-spaco",
+                "reference": "164267ff9eb69f9b37ee4f22dedea92d1633067c"
             },
             "require": {
                 "php": ">=5.3"
@@ -433,7 +433,7 @@
                 "detect",
                 "fully qualified classname"
             ],
-            "time": "2017-01-05 15:58:31"
+            "time": "2017-01-16 09:05:06"
         },
         {
             "name": "gregwar/captcha",
@@ -4528,20 +4528,12 @@
             "time": "2016-11-23 20:04:58"
         }
     ],
-    "aliases": [
-        {
-            "alias": "0.4",
-            "alias_normalized": "0.4.0.0",
-            "version": "dev-fix-classname-visitors",
-            "package": "gnugat/nomo-spaco"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "fabschurt/php-utils": 20,
         "fabschurt/silex-provider-framework": 20,
-        "fabschurt/silex-provider-captcha": 20,
-        "gnugat/nomo-spaco": 20
+        "fabschurt/silex-provider-captcha": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

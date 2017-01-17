@@ -37,7 +37,7 @@
     "fabschurt/silex-provider-framework": "^1.0@dev",
     "fabschurt/silex-provider-captcha": "^1.0@dev",
     "junker/symfony-jsend-response": "^0.1",
-    "gnugat/nomo-spaco": "dev-fix-classname-visitors as 0.4"
+    "gnugat/nomo-spaco": "^0.4,>=0.4.2"
   },
   "require-dev": {
     "consolidation/robo": "^1.0",
@@ -61,7 +61,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/fabschurt/nomo-spaco"
+      "url": "https://github.com/gnugat/nomo-spaco"
     }
   ],
   "extra": {
