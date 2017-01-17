@@ -97,7 +97,7 @@ BODY
         verify(json_decode($response->getContent(), true))->same([
             'status' => 'fail',
             'data'   => [
-                'errors' => ['This form should not contain extra fields.'],
+                'global' => ['This form should not contain extra fields.'],
             ],
         ]);
         verify($this->app['mailer.message_logger']->countMessages())->same(0);
