@@ -17,6 +17,7 @@ use Junker\Symfony\JSendResponse;
 use Junker\Symfony\JSendSuccessResponse;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
@@ -33,7 +34,10 @@ final class KontactController
     {
         $form = $app['form.factory']->createNamed('', KontactType::class);
         $form->handleRequest($req);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (!$form->isSubmitted()) {
+            return $app->abort(Response::HTTP_FORBIDDEN, 'Invalid POST data.');
+        }
+        if ($form->isValid()) {
             $app['mailer']->send($app['mailer.message.factory']($form->getData()));
 
             return new JSendSuccessResponse();
