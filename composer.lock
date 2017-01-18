@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f1b6e24f4d9b1e076678b0458a2631c2",
-    "content-hash": "6b4385c17fff4012b37455d8ebbc2edd",
+    "hash": "6ad709928dc828677708205b1f8da006",
+    "content-hash": "bd24fc7a00f632ddbbe40e4187fec8de",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -245,12 +245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabschurt/silex-provider-captcha.git",
-                "reference": "9eb9bb56bf7b40a4c8c649685a3b15add7036ba4"
+                "reference": "96f66baa987e5d0d1d06aff13b3620890d50be34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabschurt/silex-provider-captcha/zipball/9eb9bb56bf7b40a4c8c649685a3b15add7036ba4",
-                "reference": "9eb9bb56bf7b40a4c8c649685a3b15add7036ba4",
+                "url": "https://api.github.com/repos/fabschurt/silex-provider-captcha/zipball/96f66baa987e5d0d1d06aff13b3620890d50be34",
+                "reference": "96f66baa987e5d0d1d06aff13b3620890d50be34",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
                 "provider",
                 "silex"
             ],
-            "time": "2017-01-17 20:24:12"
+            "time": "2017-01-17 21:12:57"
         },
         {
             "name": "fabschurt/silex-provider-framework",
@@ -393,8 +393,14 @@
             "version": "v0.4.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/gnugat/nomo-spaco",
-                "reference": "164267ff9eb69f9b37ee4f22dedea92d1633067c"
+                "url": "https://github.com/gnugat/nomo-spaco.git",
+                "reference": "6ae7f5acbf113f6b72aad4bb8ec56a123d89ea7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gnugat/nomo-spaco/zipball/6ae7f5acbf113f6b72aad4bb8ec56a123d89ea7e",
+                "reference": "6ae7f5acbf113f6b72aad4bb8ec56a123d89ea7e",
+                "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
@@ -408,14 +414,7 @@
                     "Gnugat\\NomoSpaco\\": "src/Gnugat/NomoSpaco"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "test\\Gnugat\\NomoSpaco\\": "test"
-                },
-                "files": [
-                    "test/make_fqcn_repository.php"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
