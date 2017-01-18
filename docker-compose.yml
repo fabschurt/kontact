@@ -10,7 +10,6 @@ services:
     volumes:
       - ./src:/opt/codebase/src
       - ./app:/opt/codebase/app
-      - ./vendor:/opt/codebase/vendor
 
   frontend:
     build:
