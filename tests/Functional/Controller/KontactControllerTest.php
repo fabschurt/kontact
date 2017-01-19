@@ -136,7 +136,7 @@ BODY
      */
     public function testPostAction5(string $captchaValue, bool $mailWasSent, array $expectedResponse)
     {
-        $this->app->before(function (Request $req, SilexApplication $app) {
+        $this->app->before(function (Request $request, SilexApplication $app) {
             $app['captcha']->generate('4-8-15-16-23-42');
         });
         $this->client->request(Request::METHOD_POST, '/post', [

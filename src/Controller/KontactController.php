@@ -25,15 +25,15 @@ use Symfony\Component\HttpFoundation\Response;
 final class KontactController
 {
     /**
-     * @param Request     $req
+     * @param Request     $request
      * @param Application $app
      *
      * @return JSendResponse
      */
-    public function postAction(Request $req, Application $app): JSendResponse
+    public function postAction(Request $request, Application $app): JSendResponse
     {
         $form = $app['form.factory']->createNamed('', KontactType::class);
-        $form->handleRequest($req);
+        $form->handleRequest($request);
         if (!$form->isSubmitted()) {
             return $app->abort(Response::HTTP_FORBIDDEN, 'Invalid POST data.');
         }

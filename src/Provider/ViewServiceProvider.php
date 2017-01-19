@@ -36,6 +36,9 @@ final class ViewServiceProvider implements ServiceProviderInterface, BootablePro
     public function boot(Application $app)
     {
         $app->error(function (\Exception $e, Request $req, int $code) use ($app): JSendErrorResponse {
+
+        // Register custom JSend error handler
+        $app->error(function (\Exception $e, Request $request, int $code) use ($app): JSendErrorResponse {
             $data = [];
             if ($app['debug']) {
                 $data = [
