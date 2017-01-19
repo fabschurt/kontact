@@ -245,12 +245,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabschurt/silex-provider-captcha.git",
-                "reference": "96f66baa987e5d0d1d06aff13b3620890d50be34"
+                "reference": "a8d5e94623004b220e6a701b7fa92b0af098f6de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabschurt/silex-provider-captcha/zipball/96f66baa987e5d0d1d06aff13b3620890d50be34",
-                "reference": "96f66baa987e5d0d1d06aff13b3620890d50be34",
+                "url": "https://api.github.com/repos/fabschurt/silex-provider-captcha/zipball/a8d5e94623004b220e6a701b7fa92b0af098f6de",
+                "reference": "a8d5e94623004b220e6a701b7fa92b0af098f6de",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
                 "provider",
                 "silex"
             ],
-            "time": "2017-01-17 21:12:57"
+            "time": "2017-01-19 19:29:59"
         },
         {
             "name": "fabschurt/silex-provider-framework",
