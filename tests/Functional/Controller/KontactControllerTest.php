@@ -161,7 +161,7 @@ BODY
                 'data' => [
                     'captcha' => [
                         'This value should not be blank.',
-                        'Invalid captcha value.',
+                        'Incorrect captcha value.',
                     ],
                 ],
             ]],
@@ -169,7 +169,7 @@ BODY
                 'status' => 'fail',
                 'data' => [
                     'captcha' => [
-                        'Invalid captcha value.',
+                        'Incorrect captcha value.',
                     ],
                 ],
             ]],
