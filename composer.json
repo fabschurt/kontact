@@ -36,6 +36,7 @@
     "fabschurt/php-utils": "^1.0@dev",
     "fabschurt/silex-provider-framework": "^1.0@dev",
     "fabschurt/silex-provider-captcha": "^1.0@dev",
+    "jdesrosiers/silex-cors-provider": "^1.0",
     "junker/symfony-jsend-response": "^0.1",
     "gnugat/nomo-spaco": "^0.4,>=0.4.2"
   },

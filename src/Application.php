@@ -14,6 +14,7 @@ namespace FabSchurt\Kontact;
 use FabSchurt\Php\Utils\Config\EnvVarConfigParser;
 use FabSchurt\Silex\Provider\Captcha\CaptchaServiceProvider;
 use FabSchurt\Silex\Provider\Framework\FrameworkServiceProvider;
+use JDesrosiers\Silex\Provider\CorsServiceProvider;
 use Monolog\Logger;
 use Silex\Application as SilexApplication;
 use Silex\Provider as SilexProvider;
@@ -58,6 +59,10 @@ final class Application extends SilexApplication
         $this->register(new Provider\ViewServiceProvider());
         $this->register(new SilexProvider\MonologServiceProvider(), [
             'monolog.level' => $this['debug'] ? Logger::DEBUG : Logger::ERROR,
+        ]);
+        $this->register(new CorsServiceProvider(), [
+            'cors.allowOrigin'      => $this['cors.allowed_origins'],
+            'cors.allowCredentials' => true,
         ]);
         $this->register(new FrameworkServiceProvider());
         if ($this['enable_captcha']) {

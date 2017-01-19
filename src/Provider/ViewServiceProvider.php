@@ -17,7 +17,6 @@ use Pimple\ServiceProviderInterface;
 use Silex\Api\BootableProviderInterface;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Fabien Schurter <fabien@fabschurt.com>
@@ -36,10 +35,8 @@ final class ViewServiceProvider implements ServiceProviderInterface, BootablePro
      */
     public function boot(Application $app)
     {
-        // Send required CORS header
-        $app->after(function (Request $request, Response $response) {
-            $response->headers->set('Access-Control-Allow-Origin', '*');
-        });
+        // Handle CORS
+        $app->after($app['cors']);
 
         // Register custom JSend error handler
         $app->error(function (\Exception $e, Request $request, int $code) use ($app): JSendErrorResponse {
