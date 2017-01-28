@@ -2,4 +2,5 @@
 /var/*/*
 /.env
 *.cache
+*.log
 !.gitkeep
