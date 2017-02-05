@@ -7,9 +7,9 @@ COPY . /opt/codebase
 WORKDIR /opt/codebase
 RUN apk update --no-cache && \
     apk add \
-      bash    \
-      git     \
-      curl    \
+      bash \
+      git \
+      curl \
       php7-gd \
     && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
@@ -19,10 +19,10 @@ RUN apk update --no-cache && \
     chmod -R g+w var && \
     apk del --purge \
       bash \
-      git  \
+      git \
       curl \
     && \
-    rm -rf /var/cache/apk/*        \
+    rm -rf /var/cache/apk/* \
            /root/.composer/cache/* \
            /usr/local/bin/composer
 
