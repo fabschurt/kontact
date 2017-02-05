@@ -1,6 +1,5 @@
 /vendor/
-/var/*/*
+/var/
 /.env
 *.cache
 *.log
-!.gitkeep
