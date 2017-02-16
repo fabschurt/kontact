@@ -31,11 +31,7 @@ final class FormServiceProvider implements ServiceProviderInterface
         $container['form.kontact.max_message_length'] = 16384;
 
         $container['form.type.kontact'] = function (Container $container): KontactType {
-            return new KontactType(
-                $container['request_stack']->getCurrentRequest()->request->all(),
-                $container['form.kontact.max_message_length'],
-                $container['enable_captcha']
-            );
+            return new KontactType($container['form.kontact.max_message_length'], $container['enable_captcha']);
         };
 
         $container->extend('form.types', function (array $types, Container $container): array {
