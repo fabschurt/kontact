@@ -65,17 +65,15 @@ final class Application extends SilexApplication
             'cors.allowCredentials' => true,
         ]);
         $this->register(new FrameworkServiceProvider());
-        if ($this['enable_captcha']) {
-            $this->enableCaptcha();
-        }
+        $this->enableCaptcha();
     }
 
     /**
-     * Registers and mounts the captcha provider.
+     * Registers and mounts the captcha provider if necessary.
      */
     public function enableCaptcha()
     {
-        if (isset($this['captcha'])) {
+        if (!$this['enable_captcha'] || isset($this['captcha'])) {
             return;
         }
 
